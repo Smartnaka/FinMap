@@ -1,0 +1,5 @@
+"use client";
+import { Background, Controls, ReactFlow, type Edge, type Node } from "@xyflow/react";
+import "@xyflow/react/dist/style.css";
+import type { Entity, Relationship } from "@/lib/types";
+export function AtlasGraph({ entities, relationships }: { entities: Entity[]; relationships: Relationship[] }) { const nodes: Node[] = entities.map((e, i) => ({ id: e.slug, position: { x: 70 + (i % 3) * 220, y: 55 + Math.floor(i / 3) * 160 }, data: { label: <a href={`/companies/${e.slug}`}>{e.name}</a> }, style: { border: "1px solid #39504d", borderRadius: 6, background: "#15211f", color: "#edf2e9", padding: 8, width: 174 } })); const edges: Edge[] = relationships.map((r, i) => ({ id: String(i), source: r.from, target: r.to, label: r.type.replaceAll("_", " "), animated: false, style: { stroke: "#d6ef77" }, labelStyle: { fill: "#aeb8b2", fontSize: 10 } })); return <div className="graph"><ReactFlow nodes={nodes} edges={edges} fitView nodesDraggable={false} nodesConnectable={false}><Background color="#28413c" gap={18} /><Controls /></ReactFlow></div>; }
