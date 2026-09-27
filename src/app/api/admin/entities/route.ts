@@ -1,0 +1,4 @@
+import { NextRequest, NextResponse } from "next/server"; import { z } from "zod";
+const EntityInput = z.object({ name: z.string().min(2), slug: z.string().regex(/^[a-z0-9-]+$/), description: z.string().min(10), sourceUrl: z.string().url(), lastVerified: z.string().date() });
+function authorized(request: NextRequest) { return Boolean(process.env.ADMIN_API_KEY) && request.headers.get("x-admin-key") === process.env.ADMIN_API_KEY; }
+export async function POST(request: NextRequest) { if (!authorized(request)) return NextResponse.json({ error: "Unauthorized" }, { status: 401 }); const parsed = EntityInput.safeParse(await request.json()); if (!parsed.success) return NextResponse.json({ error: "Invalid payload", issues: parsed.error.flatten() }, { status: 422 }); return NextResponse.json({ error: "Database write adapter is not configured. Run migrations and connect the repository before enabling writes." }, { status: 501 }); }
