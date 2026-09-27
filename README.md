@@ -7,6 +7,7 @@ An evidence-aware, database-oriented public reference for Nigerian fintech infra
 - **Next.js + TypeScript** public application, typed API routes, dynamic entity pages, sitemap and robots policy.
 - **PostgreSQL** normalized schema in [`db/schema.sql`](db/schema.sql), including sources, publication status, relationships, APIs, regulations, flows, audit logs, and community-ready tables.
 - **React Flow** interactive relationship map. Graph records are structured data, never graph markup embedded in pages.
+- **Portable imports:** application files use relative module imports, so production builds do not rely on a custom bundler or TypeScript path-alias configuration.
 - **Admin foundation:** a protected write endpoint validates input and requires `ADMIN_API_KEY`. It returns `501` until a persistent repository adapter is connected; this is deliberate so no admin form appears to save data when it does not.
 
 ## Local setup
