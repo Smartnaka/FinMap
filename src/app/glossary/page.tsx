@@ -1,0 +1,2 @@
+import { glossaryTerms } from "../../lib/repository"; export const metadata = { title: "Infrastructure glossary" }; export default async function Glossary() { const glossary = await glossaryTerms(); return <main><p className="eyebrow">GLOSSARY</p><h1>Infrastructure terms</h1><div className="listing">{glossary.map(item => <article className="record" id={item.slug} key={item.slug}><strong>{item.term}</strong><p>{item.definition}</p></article>)}</div></main>; }
+export const dynamic = "force-dynamic";
